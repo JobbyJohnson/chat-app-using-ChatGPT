@@ -3,21 +3,30 @@
 <head>
   <title>Socket.IO Chat App</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
+ 
 </head>
 <body>
-  <ul id="messages"></ul>
-  <form id="form" action="#">
-    <input id="input" autocomplete="off" /><button>Send</button>
-  </form>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h1>Socket.IO Chat App</h1>
+    </div>
+    <div class="chat-messages" id="messages"></div>
+    <div class="chat-input">
+      <form id="form" action="#">
+        <input id="input" placeholder="Type a message" autocomplete="off" />
+        <button><i class="fa fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
   
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
-
+  
     const form = document.getElementById('form');
     const input = document.getElementById('input');
     const messages = document.getElementById('messages');
-
+  
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (input.value) {
@@ -25,12 +34,13 @@
         input.value = '';
       }
     });
-
+  
     socket.on('chat message', (msg) => {
       const li = document.createElement('li');
       li.textContent = msg;
       messages.appendChild(li);
     });
   </script>
+  
 </body>
 </html>
